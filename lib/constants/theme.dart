@@ -9,7 +9,7 @@ class AppTheme {
   );
 
   static final TextTheme lightTextTheme = TextTheme(
-    // headline1: _headline1, //24px
+    headline1: _headline1, //20px
     headline2: _headline2, //18px
     headline3: _headline3, //14px
     // headline4: _headline4, //16px
@@ -34,5 +34,12 @@ class AppTheme {
     fontWeight: FontWeight.w400,
     color: AppColors.textColor,
     fontSize: 18.sp,
+  );
+
+  static final TextStyle _headline1 = TextStyle(
+    fontFamily: "Supercell",
+    fontWeight: FontWeight.w400,
+    color: AppColors.textColor,
+    fontSize: 20.sp,
   );
 }

@@ -15,4 +15,7 @@ class Strings {
   static const String dps = "DPS";
   static const String elixir = "Elixir";
   static const String health = "Health";
+
+  //Character Background Tag for Hero Animation
+  static const String backgroundBox = "characterBackground";
 }

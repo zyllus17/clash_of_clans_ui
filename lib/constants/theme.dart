@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'colors.dart';
+import 'package:clash_of_clans_ui/constants/constants.dart';
 
 class AppTheme {
   static final ThemeData appTheme = ThemeData(

@@ -1,5 +1,5 @@
-class Strings {
-  Strings._();
+class AppText {
+  AppText._();
 
 //Characters
   static const String barbarian = "Barbarian";
@@ -15,6 +15,7 @@ class Strings {
   static const String dps = "DPS";
   static const String elixir = "Elixir";
   static const String health = "Health";
+  static const String clashofclans = "Clash of Clans";
 
   //Character Background Tag for Hero Animation
   static const String backgroundBox = "characterBackground";

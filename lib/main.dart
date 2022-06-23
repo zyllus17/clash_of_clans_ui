@@ -12,11 +12,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(411, 731),
-      builder: () => MaterialApp(
-        title: 'Material App',
-        theme: AppTheme.appTheme,
-        home: const HomeScreen(),
-      ),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Material App',
+          theme: AppTheme.appTheme,
+          home: const HomeScreen(),
+        );
+      },
     );
   }
 }

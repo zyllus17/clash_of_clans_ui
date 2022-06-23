@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:clash_of_clans_ui/constants/constants.dart';
+import 'package:clash_of_clans_ui/widgets/widgets.dart';
 
-import 'package:clash_of_clans_ui/constants/colors.dart';
-import 'package:clash_of_clans_ui/constants/images.dart';
-import 'package:clash_of_clans_ui/constants/strings.dart';
-
-class CharacterScreen extends StatelessWidget {
+class CharacterScreen extends StatefulWidget {
   final String characterImage;
   final Color backgroundColor;
   final double left;
@@ -14,6 +10,9 @@ class CharacterScreen extends StatelessWidget {
   final double bottom;
   final String characterName;
   final String attackType;
+  final double levelWidth1;
+  final double levelWidth2;
+  final double levelWidth3;
 
   const CharacterScreen({
     Key? key,
@@ -25,7 +24,16 @@ class CharacterScreen extends StatelessWidget {
     required this.bottom,
     required this.characterName,
     required this.attackType,
+    required this.levelWidth1,
+    required this.levelWidth2,
+    required this.levelWidth3,
   }) : super(key: key);
+
+  @override
+  State<CharacterScreen> createState() => _CharacterScreenState();
+}
+
+class _CharacterScreenState extends State<CharacterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,37 +42,44 @@ class CharacterScreen extends StatelessWidget {
           Stack(
             clipBehavior: Clip.none,
             children: [
-              Container(
-                height: 380.h,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: backgroundColor,
-                  borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
+              Hero(
+                tag: 'box-${widget.backgroundColor}',
+                child: Container(
+                  height: 380.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: widget.backgroundColor,
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
                   ),
                 ),
               ),
               Positioned(
-                top: top,
-                right: right,
-                left: left,
-                bottom: bottom,
-                child: Image.asset(
-                  characterImage,
-                  fit: BoxFit.contain,
+                top: widget.top,
+                right: widget.right,
+                left: widget.left,
+                bottom: widget.bottom,
+                child: Hero(
+                  tag: 'character-${widget.characterImage}',
+                  child: Image.asset(
+                    widget.characterImage,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               IconButton(
-                  alignment: Alignment.topLeft,
-                  padding: EdgeInsets.only(left: 25, top: 35),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.black,
-                  )),
+                alignment: Alignment.topLeft,
+                padding: const EdgeInsets.only(left: 25, top: 35),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                ),
+              ),
             ],
           ),
           Padding(
@@ -72,7 +87,7 @@ class CharacterScreen extends StatelessWidget {
             child: Align(
               alignment: Alignment.topRight,
               child: Text(
-                characterName,
+                widget.characterName,
                 style: Theme.of(context).textTheme.headline1,
               ),
             ),
@@ -96,10 +111,10 @@ class CharacterScreen extends StatelessWidget {
                           SizedBox(
                               height: 20,
                               width: 20,
-                              child: Image.asset(Images.level)),
+                              child: Image.asset(AppImages.level)),
                           SizedBox(width: 18.w),
                           Text(
-                            Strings.level,
+                            AppText.level,
                             style: Theme.of(context).textTheme.headline3,
                           ),
                         ],
@@ -107,10 +122,10 @@ class CharacterScreen extends StatelessWidget {
                       SizedBox(width: 55.w),
                       Row(
                         children: <Widget>[
-                          Image.asset(Images.attack),
+                          Image.asset(AppImages.attack),
                           SizedBox(width: 18.w),
                           Text(
-                            attackType,
+                            widget.attackType,
                             style: Theme.of(context).textTheme.headline3,
                           ),
                         ],
@@ -128,14 +143,17 @@ class CharacterScreen extends StatelessWidget {
                             SizedBox(
                                 height: 20,
                                 width: 20,
-                                child: Image.asset(Images.dps)),
+                                child: Image.asset(AppImages.dps)),
                             SizedBox(width: 18.w),
                             Text(
-                              Strings.dps,
+                              AppText.dps,
                               style: Theme.of(context).textTheme.headline5,
                             ),
-                            Spacer(),
-                            LevelBar(),
+                            const Spacer(),
+                            LevelBar(
+                              levelWidth: widget.levelWidth1,
+                              color: AppColors.yellow,
+                            ),
                           ],
                         ),
                         Row(
@@ -143,14 +161,17 @@ class CharacterScreen extends StatelessWidget {
                             SizedBox(
                                 height: 20,
                                 width: 20,
-                                child: Image.asset(Images.elixir)),
+                                child: Image.asset(AppImages.elixir)),
                             SizedBox(width: 18.w),
                             Text(
-                              Strings.elixir,
+                              AppText.elixir,
                               style: Theme.of(context).textTheme.headline5,
                             ),
-                            Spacer(),
-                            LevelBar(),
+                            const Spacer(),
+                            LevelBar(
+                              levelWidth: widget.levelWidth2,
+                              color: AppColors.pink,
+                            ),
                           ],
                         ),
                         Row(
@@ -158,14 +179,17 @@ class CharacterScreen extends StatelessWidget {
                             SizedBox(
                                 height: 20,
                                 width: 20,
-                                child: Image.asset(Images.health)),
+                                child: Image.asset(AppImages.health)),
                             SizedBox(width: 18.w),
                             Text(
-                              Strings.health,
+                              AppText.health,
                               style: Theme.of(context).textTheme.headline5,
                             ),
-                            Spacer(),
-                            LevelBar(),
+                            const Spacer(),
+                            LevelBar(
+                              levelWidth: widget.levelWidth3,
+                              color: AppColors.red,
+                            ),
                           ],
                         ),
                       ],
@@ -177,45 +201,6 @@ class CharacterScreen extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class LevelBar extends StatefulWidget {
-  const LevelBar({Key? key}) : super(key: key);
-
-  @override
-  State<LevelBar> createState() => _LevelBarState();
-}
-
-class _LevelBarState extends State<LevelBar> {
-  @override
-  // void initState() {
-  //   super.initState();
-  //   double width = 20;
-  // }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          height: 10,
-          width: 156,
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        Container(
-          height: 10.0,
-          width: 56,
-          decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      ],
     );
   }
 }
